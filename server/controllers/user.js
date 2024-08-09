@@ -8,6 +8,7 @@ exports.signup = (req, res, next) => {
 
 // use bcrypt to compare the password and send a token to the user
 exports.login = (req, res, next) => {
-  res.status(201).json({ message: "User logged in!" });
-  console.log(req.body);
+  res.send({
+    token: 'test123'
+  })
 };
