@@ -56,12 +56,12 @@
   transform: scale(0.95);
 }
 
-.goto {
+.view {
   align-self: center;
   font-size: 0.9rem;
 }
 
-.gotoBtn {
+.viewLink {
   background-color: white;
   border: none;
   text-decoration: underline;
@@ -69,6 +69,6 @@
   padding: 0;
 }
 
-.link:visited {
+.viewLink:visited {
   color: black;
 }

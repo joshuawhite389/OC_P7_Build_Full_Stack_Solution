@@ -1,0 +1,29 @@
+.logo {
+    position: relative;
+    width: 500px;
+    bottom: 180px;
+}
+
+.inputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.goto {
+  align-self: center;
+  font-size: 0.9rem;
+}
+
+.gotoBtn {
+  background-color: white;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
+
+.view {
+  margin-bottom: 10rem;
+}
