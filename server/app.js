@@ -2,6 +2,7 @@ const express = require('express');
 // const path = require("path");
 const dotEnv = require('dotenv');
 const userRoutes = require('./routes/user');
+const {testConnection} = require('./models/connection');
 
 dotEnv.config();
 
@@ -24,6 +25,8 @@ app.use((req, res, next) => {
 });
 // Serve static images from the images folder so express knows what to do with images
 // app.use('/images', express.static(path.join(__dirname, 'images')));
+
+testConnection();
 
 app.use("/api/auth", userRoutes);
 

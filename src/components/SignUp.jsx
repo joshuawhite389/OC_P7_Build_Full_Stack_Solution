@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 async function loginUser(credentials) {
+  const { username, password } = credentials;
   return fetch('http://localhost:3001/api/auth/signup', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(credentials),
+    body: JSON.stringify({ username, password }),
   }).then((data) => data.json());
 }
 
