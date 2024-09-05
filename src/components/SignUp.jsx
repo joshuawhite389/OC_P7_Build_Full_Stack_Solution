@@ -32,30 +32,39 @@ const SignUp = ({ setView }) => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-
-    await signUpUser({
-      username,
-      password,
-    });
+    if (!username || !password) {
+      setError('Please fill in all fields');
+      return;
+    } else {
+      await signUpUser({
+        username,
+        password,
+      });
+      setUsername('');
+      setPassword('');
+      setView('login');
+    }
   };
 
   return (
     <>
       <form className="inputForm">
-        { error &&  <div>{ error }</div>}
         <h2 id="loginHeading">SIGN UP</h2>
         <input
           type="text"
           id="username"
           placeholder="Username"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
         <input
           type="password"
           id="password"
           placeholder="Password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
+        {error && <span className="errorMsg">{error}</span>}
         <button
           type="button"
           className="btn"
