@@ -6,7 +6,9 @@ const User = require('../models/users');
 exports.signup = async (req, res, next) => {
   try {
     // Check if the username already exists
-    const existingUser = await User.findOne({ where: { username: req.body.username } });
+    const existingUser = await User.findOne({
+      where: { username: req.body.username },
+    });
 
     if (existingUser) {
       console.log('Username already exists');
@@ -29,39 +31,29 @@ exports.signup = async (req, res, next) => {
 };
 
 // use bcrypt to compare the password and send a token to the user
-exports.login = (req, res, next) => {
-  const user = User.findOne({ where: { username: req.body.username } })
-    .then((user) => {
-      if (!user) {
-        return res.status(401).json({
-          error: new Error('User not found!'),
-        });
-      }
-      bcrypt
-        .compare(req.body.password, user.password)
-        .then((valid) => {
-          if (!valid) {
-            return res.status(401).json({
-              error: new Error('Incorrect password!'),
-            });
-          }
-          const token = jwt.sign({ userId: user._id }, 'RANDOM_TOKEN_SECRET', {
-            expiresIn: '24h',
-          });
-          res.status(200).json({
-            userId: user._id,
-            token: token,
-          });
-        })
-        .catch((error) => {
-          res.status(500).json({
-            error: error,
-          });
-        });
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: error,
-      });
+exports.login = async (req, res, next) => {
+  try {
+    // Check if the user exists
+    const user = await User.findOne({ where: { username: req.body.username } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'User not found!' });
+    }
+
+    // Compare the password
+    const valid = await bcrypt.compare(req.body.password, user.password);
+
+    if (!valid) {
+      return res.status(401).json({ error: 'Incorrect password!' });
+    }
+
+    // Generate JWT token using user_id 
+    const token = jwt.sign({ userId: user.user_id }, 'RANDOM_TOKEN_SECRET', {
+      expiresIn: '24h',
     });
+
+    res.status(200).json({ userId: user.user_id, token });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 };

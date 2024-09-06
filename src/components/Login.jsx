@@ -25,6 +25,7 @@ const Login = ({ setToken, setView }) => {
       if (!response.ok) {
         throw new Error(data.error || 'Failed to login');
       }
+      setToken(data.token);
       setError(null);
       return data;
     } catch (error) {
@@ -39,13 +40,12 @@ const Login = ({ setToken, setView }) => {
       setError('Please fill in all fields');
       return;
     } else {
-      const token = await loginUser({
+      await loginUser({
         username,
         password,
       });
       setUsername('');
       setPassword('');
-      setToken(token);
     }
   };
 
@@ -57,11 +57,13 @@ const Login = ({ setToken, setView }) => {
           type="text"
           id="username"
           placeholder="Username"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
         <input
           type="password"
           id="password"
+          value={password}
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         ></input>

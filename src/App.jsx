@@ -4,20 +4,14 @@ import Login from './components/Login';
 import Signup from './components/SignUp';
 import logo from './assets/Groupomania_Logos/icon-left-font.png';
 import './styles/App.css';
+import useToken from './useToken';
 
-function setToken(token) {
-  sessionStorage.setItem('token', JSON.stringify(token));
-}
 
-function getToken() {
-  const tokenString = sessionStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken?.token;
-}
 
 const App = () => {
   const [view, setView] = useState('login');
-  const token = getToken();
+  const { token, setToken } = useToken();
+
 
   return (
     <>
