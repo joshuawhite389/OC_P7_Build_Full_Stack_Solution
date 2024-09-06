@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/SignUp';
-import logo from './assets/Groupomania_Logos/icon-left-font.png';
 import './styles/App.css';
 import useToken from './useToken';
+import Home from './components/Home';
+import Header from './components/Header';
 
 
 
@@ -15,7 +16,7 @@ const App = () => {
 
   return (
     <>
-      <img src={logo} alt="Groupomania logo" className="logo" />
+      <Header />
       <div className="inputContainer">
         {!token ? (
           view === 'login' ? (
@@ -28,7 +29,7 @@ const App = () => {
             </>
           )
         ) : (
-          <h2>The App</h2>
+          <Home />
         )}
       </div>
     </>
