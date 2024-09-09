@@ -1,0 +1,34 @@
+.postInfo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spacerDots {
+  font-size: .5rem;
+}
+
+.avatar, .spacerDots, .timestamp, .username {
+  padding-left: 1rem;
+}
+
+.postTitle {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.postContent {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.postContent::after {
+  content: "";
+  display: block;
+  margin-top: 2rem;
+  border-bottom: 1px solid #cbcbcb;
+  width: 450px;
+}
