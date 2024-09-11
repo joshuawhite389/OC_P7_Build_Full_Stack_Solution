@@ -15,8 +15,36 @@
   width: 25%;
 }
 
+.accountPostContainer {
+  display: flex;
+  align-items: center;
+}
+
+.newPostContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 12px;
+  border-radius: 30px;
+  margin-right: 4rem;
+  border: none;
+  font-size: 1.2rem;
+  background-color: white;
+  transition: background-color 0.2s ease;
+}
+
+.newPostContainer:hover {
+  background-color: #ec300ab0;
+  cursor: pointer;
+}
+
+.plusBtn {
+  margin-right: 1rem;
+  font-size: 2rem;
+}
+
 .profileIconContainer {
-  border: 3px solid black;
+  outline: 3px solid black;
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -29,6 +57,7 @@
 
 .profileIconContainer:hover {
   background-color: #ec300ab0;
+  outline: none;
 }
 
 .profileIcon {

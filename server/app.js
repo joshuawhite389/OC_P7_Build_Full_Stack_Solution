@@ -2,6 +2,7 @@ const express = require('express');
 // const path = require("path");
 const dotEnv = require('dotenv');
 const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/posts');
 const {testConnection} = require('./models/connection');
 
 dotEnv.config();
@@ -30,7 +31,8 @@ testConnection();
 
 app.use("/api/auth", userRoutes);
 
-// app.use('/api/sauces', sauceRoutes);
+app.use('/api/posts', postRoutes);
+
 app.get('/', (req, res) => {
   res.send('Server is running');
 });

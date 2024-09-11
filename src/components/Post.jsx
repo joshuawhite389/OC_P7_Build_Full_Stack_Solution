@@ -3,18 +3,18 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import '../styles/Post.css';
 
 
-const Post = () => {
+const Post = ({ title, content, username, timestamp }) => {
   return (
     <div>
       <div className='postInfo'>
         <FontAwesomeIcon className="avatar" icon={faUser} />
-        <div className='username'>Username</div>
+        <div className='username'>{username}</div>
         <div className='spacerDots'>{'\u2B24'}</div>
-        <div className='timestamp'>Time/ Date of Post</div>
+        <div className='timestamp'>{timestamp}</div>
         <div className='spacerDots'>{'\u2B24'}{'\u2B24'}{'\u2B24'}</div>
       </div>
-      <div className="postTitle">Title of Post</div>
-      <div className="postContent">This is a new post with the following content...</div>
+      <div className="postTitle">{title}</div>
+      <div className="postContent">{content}</div>
     </div>
   );
 };

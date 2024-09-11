@@ -5,3 +5,15 @@ CREATE TABLE users (
   username VARCHAR (50) UNIQUE NOT NULL, 
   password VARCHAR (100) NOT NULL
 );
+
+DROP TABLE IF EXISTS posts;
+
+CREATE TABLE posts (
+  post_id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL, 
+  username VARCHAR (50) UNIQUE NOT NULL, 
+  title TEXT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  updated_at TIMESTAMP NOT NULL
+);

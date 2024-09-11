@@ -12,11 +12,18 @@ import Header from './components/Header';
 const App = () => {
   const [view, setView] = useState('login');
   const { token, setToken } = useToken();
+  const [posts, setPosts] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
 
   return (
     <>
-      <Header />
+      <Header 
+        posts={posts}
+        setPosts={setPosts}
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+      />
       <div className="inputContainer">
         {!token ? (
           view === 'login' ? (
@@ -29,7 +36,11 @@ const App = () => {
             </>
           )
         ) : (
-          <Home />
+          <Home 
+            posts={posts}
+            setPosts={setPosts}
+            isOpen={isOpen}
+          />
         )}
       </div>
     </>
