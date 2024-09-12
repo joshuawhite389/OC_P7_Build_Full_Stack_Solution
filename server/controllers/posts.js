@@ -15,6 +15,23 @@ exports.getPosts = (req, res, next) => {
     });
 };
 
+// Get one post
+exports.getOnePost = (req, res, next) => {
+  Posts.findOne({
+    where: {
+      post_id: req.params.id,
+    },
+  })
+    .then((post) => {
+      res.status(200).json(post);
+    })
+    .catch((error) => {
+      res.status(404).json({
+        error: error,
+      });
+    });
+};
+
 // create new post
 exports.addPost = async (req, res) => {
 
