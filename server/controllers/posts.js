@@ -36,3 +36,27 @@ exports.addPost = async (req, res) => {
   const result = await Posts.findAll();
   res.status(201).json(result);
 }
+
+// delete post
+exports.deletePost = async (req, res) => {
+  const post = await Posts.findOne({
+    where: {
+      post_id: req.body.post_id,
+    }
+  });
+
+  if (post) {
+    await Posts.destroy({
+      where: {
+        post_id: req.body.post_id,
+      }
+    });
+  } else {
+    res.status(404).json({
+      message: 'Post not found'
+    });
+  }
+
+  const result = await Posts.findAll();
+  res.status(200).json(result);
+}

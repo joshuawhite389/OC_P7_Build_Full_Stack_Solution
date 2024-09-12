@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/SignUp';
 import './styles/App.css';
@@ -14,7 +13,7 @@ const App = () => {
   const { token, setToken } = useToken();
   const { userId, setUserId } = useToken();
   const [posts, setPosts] = useState([]);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   async function getPosts() {
     const response = await fetch('http://localhost:3001/api/posts');

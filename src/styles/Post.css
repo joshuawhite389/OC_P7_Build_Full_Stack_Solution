@@ -4,11 +4,30 @@
   align-items: center;
 }
 
-.spacerDots {
-  font-size: .5rem;
+.avatarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: 2px solid black;
+  border-radius: 50%;
 }
 
-.avatar, .spacerDots, .timestamp, .username {
+.avatar {
+  padding: 8px;
+  height: 17px;
+  width: 17px;
+}
+
+.trashCan {
+  margin-left: 4rem;
+  cursor: pointer;
+}
+
+.username {
+  padding-left: 4rem;
+}
+
+.timestamp {
   padding-left: 1rem;
 }
 
