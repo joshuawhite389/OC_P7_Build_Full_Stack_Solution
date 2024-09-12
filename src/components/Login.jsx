@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const Login = ({ setToken, setView }) => {
+const Login = ({ setToken, setView, setUserId }) => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState(null);
@@ -26,6 +26,8 @@ const Login = ({ setToken, setView }) => {
         throw new Error(data.error || 'Failed to login');
       }
       setToken(data.token);
+      console.log(data);
+      setUserId(data.userId);
       setError(null);
       return data;
     } catch (error) {

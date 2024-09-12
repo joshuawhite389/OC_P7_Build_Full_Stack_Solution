@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './components/Login';
 import Signup from './components/SignUp';
@@ -12,8 +12,19 @@ import Header from './components/Header';
 const App = () => {
   const [view, setView] = useState('login');
   const { token, setToken } = useToken();
+  const { userId, setUserId } = useToken();
   const [posts, setPosts] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+
+  async function getPosts() {
+    const response = await fetch('http://localhost:3001/api/posts');
+    const data = await response.json();
+    setPosts(data);
+  }
+
+  useEffect(() => {
+    getPosts();
+  }, [posts]);
 
 
   return (
@@ -28,7 +39,7 @@ const App = () => {
         {!token ? (
           view === 'login' ? (
             <>
-              <Login setToken={setToken} setView={setView} />
+              <Login setToken={setToken} setView={setView} setUserId={setUserId} />
             </>
           ) : (
             <>
@@ -40,6 +51,8 @@ const App = () => {
             posts={posts}
             setPosts={setPosts}
             isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            userId={userId}
           />
         )}
       </div>

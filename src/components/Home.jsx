@@ -2,25 +2,14 @@ import { useState, useEffect } from 'react';
 import Post from './Post';
 import NewPostModal from './NewPostModal';
 
-const Home = ({ setPosts, posts, isOpen }) => {
-  
-
-  async function getPosts() {
-    const response = await fetch('http://localhost:3001/api/posts');
-    const data = await response.json();
-    setPosts(data);
-  
-  }
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
+const Home = ({ setPosts, posts, isOpen, setIsOpen, userId }) => {
   
 
   return (
     <div>
-      {isOpen && <NewPostModal />}
+      {isOpen && (
+        <NewPostModal setIsOpen={setIsOpen} setPosts={setPosts} posts={posts} userId={userId} />
+      )}
       {posts.map(({ post_id, title, content, username, timestamp }) => (
         <Post
           key={post_id}

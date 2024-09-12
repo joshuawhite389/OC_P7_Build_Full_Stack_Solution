@@ -1,4 +1,5 @@
 const Posts = require("../models/posts");
+const User = require('../models/users');
 const fs = require("fs");
 
 // Get all posts
@@ -16,9 +17,18 @@ exports.getPosts = (req, res, next) => {
 
 // create new post
 exports.addPost = async (req, res) => {
+
+  const user = await User.findOne({
+    where: {
+      user_id: req.body.user_id,
+    }
+  });
+
+  const username = user.username;
+
   await Posts.create({
       user_id: req.body.user_id,
-      username: req.body.username,
+      username: username,
       title: req.body.title,
       content: req.body.content,
   });
