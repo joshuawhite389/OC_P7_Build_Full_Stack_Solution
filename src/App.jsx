@@ -14,6 +14,7 @@ const App = () => {
   const { userId, setUserId } = useToken();
   const [posts, setPosts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  
 
   async function getPosts() {
     const response = await fetch('http://localhost:3001/api/posts');
@@ -24,6 +25,7 @@ const App = () => {
   useEffect(() => {
     getPosts();
   }, [posts]);
+
 
 
   return (
@@ -38,7 +40,7 @@ const App = () => {
         {!token ? (
           view === 'login' ? (
             <>
-              <Login setToken={setToken} setView={setView} setUserId={setUserId} />
+              <Login setToken={setToken} setView={setView} setUserId={setUserId}  />
             </>
           ) : (
             <>

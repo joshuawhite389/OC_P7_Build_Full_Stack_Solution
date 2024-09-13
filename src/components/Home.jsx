@@ -25,6 +25,7 @@ const Home = ({ setPosts, posts, isOpen, setIsOpen, userId }) => {
               content={content}
               username={username}
               created_at={created_at}
+              userId={userId}
             />
           ))}
       </div>

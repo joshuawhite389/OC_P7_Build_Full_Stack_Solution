@@ -27,6 +27,7 @@ const Login = ({ setToken, setView, setUserId }) => {
       }
       setToken(data.token);
       console.log(data);
+      sessionStorage.setItem('username', JSON.stringify(data.username));
       setUserId(data.userId);
       setError(null);
       return data;
@@ -35,6 +36,9 @@ const Login = ({ setToken, setView, setUserId }) => {
       setError(error.message);
     }
   }
+
+  
+    
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +50,6 @@ const Login = ({ setToken, setView, setUserId }) => {
         username,
         password,
       });
-      setUsername('');
       setPassword('');
     }
   };

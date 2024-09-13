@@ -2,9 +2,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Post.css';
+import { useEffect, useState } from 'react';
 
-const Post = ({ title, content, username, created_at, post_id }) => {
+const Post = ({ title, content, username, created_at, post_id, userId }) => {
   const navigate = useNavigate();
+
+  const [loginUsername, setLoginUsername] = useState();
 
   function convertToEST(isoDateString) {
     const date = new Date(isoDateString);
@@ -46,6 +49,16 @@ const Post = ({ title, content, username, created_at, post_id }) => {
     navigate(`/posts/${post_id}`);
   };
 
+  const getLoginUsername = () => {
+    const usernameString = sessionStorage.getItem('username');
+    const username = JSON.parse(usernameString);
+    setLoginUsername(username);
+  };
+
+  useEffect(() => {
+    getLoginUsername();
+  }, []);
+
   return (
     <div onClick={handleClick} className="postContainer">
       <div className="post">
@@ -55,14 +68,14 @@ const Post = ({ title, content, username, created_at, post_id }) => {
           </div>
           <div className="username">{username}</div>
           <div className="timestamp">{convertToEST(created_at)}</div>
-          <FontAwesomeIcon
+          {loginUsername === username &&( <FontAwesomeIcon
             className="trashCan"
             onClick={(e) => {
               e.stopPropagation();
               handleDelete(post_id);
             }}
             icon={faTrashCan}
-          />
+          />)}
         </div>
         <div className="postTitle">{title}</div>
       </div>
