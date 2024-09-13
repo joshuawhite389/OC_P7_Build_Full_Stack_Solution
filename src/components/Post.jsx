@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Post.css';
 import { useEffect, useState } from 'react';
 
-const Post = ({ title, content, username, created_at, post_id, userId }) => {
+const Post = ({ title, content, username, created_at, post_id, userId, token, getPosts }) => {
   const navigate = useNavigate();
+  console.log('post component rendered');
 
   const [loginUsername, setLoginUsername] = useState();
 
@@ -31,6 +32,7 @@ const Post = ({ title, content, username, created_at, post_id, userId }) => {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify({
             post_id: post_id,
@@ -39,6 +41,8 @@ const Post = ({ title, content, username, created_at, post_id, userId }) => {
       );
       if (!response.ok) {
         console.error('Failed to delete post');
+      } else {
+        getPosts();
       }
     } catch (error) {
       console.error('Network error:', error);

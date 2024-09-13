@@ -1,5 +1,5 @@
 const express = require('express');
-// const path = require("path");
+const path = require("path");
 const dotEnv = require('dotenv');
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/posts');
@@ -24,10 +24,11 @@ app.use((req, res, next) => {
   );
   next();
 });
-// Serve static images from the images folder so express knows what to do with images
-// app.use('/images', express.static(path.join(__dirname, 'images')));
 
 testConnection();
+
+// Serve static images from the images folder so express knows what to do with images
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use("/api/auth", userRoutes);
 

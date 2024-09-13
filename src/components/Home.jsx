@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import Post from './Post';
 import NewPostModal from './NewPostModal';
 
-const Home = ({ setPosts, posts, isOpen, setIsOpen, userId }) => {
+const Home = ({ setPosts, posts, isOpen, setIsOpen, userId, token, getPosts }) => {
+  console.log('Home component rendered');
   return (
     <div>
       {isOpen && (
@@ -11,6 +12,8 @@ const Home = ({ setPosts, posts, isOpen, setIsOpen, userId }) => {
           setPosts={setPosts}
           posts={posts}
           userId={userId}
+          token={token}
+          getPosts={getPosts}
         />
       )}
       <div className="postContainer">
@@ -26,6 +29,8 @@ const Home = ({ setPosts, posts, isOpen, setIsOpen, userId }) => {
               username={username}
               created_at={created_at}
               userId={userId}
+              token={token}
+              getPosts={getPosts}
             />
           ))}
       </div>

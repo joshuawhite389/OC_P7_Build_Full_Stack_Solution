@@ -26,6 +26,9 @@ const Posts = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    image_url: {
+      type: DataTypes.TEXT,
+    },
   },
   { timestamps: true, createdAt: 'created_at', updatedAt: 'updated_at' }
 );
