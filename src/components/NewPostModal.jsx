@@ -74,7 +74,6 @@ const NewPostModal = ({ setPosts, posts, setIsOpen, userId, token, getPosts }) =
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
         getPosts();
         closeModal();
       })

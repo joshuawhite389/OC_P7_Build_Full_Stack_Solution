@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 
 const Post = ({ title, content, username, created_at, post_id, userId, token, getPosts }) => {
   const navigate = useNavigate();
-  console.log('post component rendered');
 
   const [loginUsername, setLoginUsername] = useState();
 

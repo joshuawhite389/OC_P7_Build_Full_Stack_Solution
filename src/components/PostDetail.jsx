@@ -38,6 +38,7 @@ const PostDetail = () => {
     <div>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
+      {post.image_url && <img src={post.image_url} alt={post.title} />}
       <p>
         By {post.username} on {new Date(post.created_at).toLocaleString()}
       </p>
