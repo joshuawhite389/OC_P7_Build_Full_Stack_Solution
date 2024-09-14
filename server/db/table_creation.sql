@@ -8,7 +8,7 @@
 -- );
 
 
-update users set read_posts = '1, 25' where username = 'joshua';
+update users set read_posts = '1, 25' where username = 'newestuser';
 
 -- DROP TABLE IF EXISTS posts;
 

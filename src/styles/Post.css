@@ -63,3 +63,14 @@
   border-bottom: 1px solid #cbcbcb;
   width: 450px;
 }
+
+.unread {
+  margin-left: 1rem;
+  text-align:center;
+  display:block;
+  padding-top: 10px;
+  width:100px;
+  height:30px;
+  border-radius: 10px;
+  background:#ec300a57;
+}

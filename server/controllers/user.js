@@ -100,17 +100,20 @@ exports.addReadPost = async (req, res, next) => {
     const user = await User.findOne({ where: { user_id: userId } });
     const post_id = req.body.post_id;
     let readPosts = user.read_posts;
-
-    let readPostsArray = readPosts.split(',');
-    if (!readPostsArray.includes(post_id)) {
-      readPostsArray.push(post_id);
-      readPosts = readPostsArray.join(',');
-      await User.update(
-        { read_posts: readPosts },
-        { where: { user_id: userId } }
-      );
-      res.status(200).json({ message: 'Post added to read_posts' });
+    if (!readPosts) {
+      readPosts = post_id;
+    } else {
+      let readPostsArray = readPosts.split(',');
+      if (!readPostsArray.includes(post_id)) {
+        readPostsArray.push(post_id);
+        readPosts = readPostsArray.join(',');
+      }
     }
+    await User.update(
+      { read_posts: readPosts },
+      { where: { user_id: userId } }
+    );
+    res.status(200).json({ message: 'Post added to read_posts' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

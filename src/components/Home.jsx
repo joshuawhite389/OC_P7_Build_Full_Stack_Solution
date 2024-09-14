@@ -18,7 +18,7 @@ const Home = ({ setPosts, posts, isOpen, setIsOpen, userId, token, getPosts }) =
         {posts
           .slice() // Create a shallow copy of the posts array to avoid mutating the original array
           .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort by created_at in descending order
-          .map(({ post_id, title, content, username, image_url, created_at }) => (
+          .map(({ post_id, title, content, username, image_url, created_at, user_id }) => (
             <Post
               key={post_id}
               post_id={post_id}
@@ -30,6 +30,7 @@ const Home = ({ setPosts, posts, isOpen, setIsOpen, userId, token, getPosts }) =
               token={token}
               getPosts={getPosts}
               image_url={image_url}
+              userIdOfPost={user_id}
             />
           ))}
       </div>

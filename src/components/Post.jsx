@@ -13,6 +13,7 @@ const Post = ({
   userId,
   token,
   getPosts,
+  userIdOfPost,
 }) => {
   const navigate = useNavigate();
 
@@ -130,6 +131,8 @@ const Post = ({
           </div>
           <div className="username">{username}</div>
           <div className="timestamp">{convertToEST(created_at)}</div>
+          {/* if the post has not been read, add unread indicator. If post made by user, never show unread.  */}
+          {readPosts && readPosts.includes(post_id) ? null: (userId === userIdOfPost ? null : <div className='unread'>New</div>)}
           {loginUsername === username && (
             <FontAwesomeIcon
               className="trashCan"
@@ -141,7 +144,6 @@ const Post = ({
             />
           )}
         </div>
-        {readPosts.includes(post_id) ? null: <div>unread</div>}
         <div className="postTitle">{title}</div>
       </div>
     </div>
