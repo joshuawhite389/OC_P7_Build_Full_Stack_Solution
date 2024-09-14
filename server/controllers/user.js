@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users');
+const { read } = require('fs');
 
 // use bcrypt to hash the password and save the user to the database
 exports.signup = async (req, res, next) => {
@@ -62,24 +63,55 @@ exports.login = async (req, res, next) => {
 
 // delete the user from the database
 exports.deleteAccount = async (req, res, next) => {
-  console.log('deleteAccount');
-  console.log('req.params', req.params);
   try {
-    const userId = req.params.id;  // Use req.params for URL parameters
-    
+    const userId = req.params.id; // Use req.params for URL parameters
+
     // Check if the user exists
     const user = await User.findOne({ where: { user_id: userId } });
-    console.log('user', userId);
-    
+
     if (!user) {
       return res.status(401).json({ error: 'User not found!' });
     }
-    
+
     // Delete the user
     await User.destroy({ where: { user_id: userId } });
     res.status(200).json({ message: 'User deleted successfully' });
   } catch (error) {
-    console.log('error, this is an error');
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// get the posts that the user has read
+exports.getReadPosts = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findOne({ where: { user_id: userId } });
+    const readPosts = user.read_posts;
+    res.status(200).json({ readPosts });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// add the post to the user's read_posts
+exports.addReadPost = async (req, res, next) => {
+  try {
+    const userId = req.body.userId;
+    const user = await User.findOne({ where: { user_id: userId } });
+    const post_id = req.body.post_id;
+    let readPosts = user.read_posts;
+
+    let readPostsArray = readPosts.split(',');
+    if (!readPostsArray.includes(post_id)) {
+      readPostsArray.push(post_id);
+      readPosts = readPostsArray.join(',');
+      await User.update(
+        { read_posts: readPosts },
+        { where: { user_id: userId } }
+      );
+      res.status(200).json({ message: 'Post added to read_posts' });
+    }
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };

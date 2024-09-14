@@ -18,6 +18,10 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    read_posts: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    }
   },
   { timestamps: false }
 );
