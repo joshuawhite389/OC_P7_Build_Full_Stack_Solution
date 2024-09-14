@@ -31,7 +31,7 @@ const PostDetail = () => {
   }, [postId]);
 
   if (!post) {
-    return <div>Loading...</div>;
+    return <div>Cannot display this post...</div>;
   }
 
   return (

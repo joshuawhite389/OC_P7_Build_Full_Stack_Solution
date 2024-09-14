@@ -47,14 +47,39 @@ exports.login = async (req, res, next) => {
       return res.status(401).json({ error: 'Incorrect password!' });
     }
 
-    // Generate JWT token using user_id 
+    // Generate JWT token using user_id
     const token = jwt.sign({ userId: user.user_id }, 'RANDOM_TOKEN_SECRET', {
       expiresIn: '24h',
     });
 
-    res.status(200).json({ userId: user.user_id, token, username: user.username });
+    res
+      .status(200)
+      .json({ userId: user.user_id, token, username: user.username });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
+// delete the user from the database
+exports.deleteAccount = async (req, res, next) => {
+  console.log('deleteAccount');
+  console.log('req.params', req.params);
+  try {
+    const userId = req.params.id;  // Use req.params for URL parameters
+    
+    // Check if the user exists
+    const user = await User.findOne({ where: { user_id: userId } });
+    console.log('user', userId);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'User not found!' });
+    }
+    
+    // Delete the user
+    await User.destroy({ where: { user_id: userId } });
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.log('error, this is an error');
+    res.status(500).json({ error: error.message });
+  }
+};

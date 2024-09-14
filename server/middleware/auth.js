@@ -7,6 +7,7 @@ module.exports = (req, res, next) => {
     //  Decode using secret key
     const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET');
     const userId = decodedToken.userId;
+    console.log('userId', userId);
     // Add the userId to the request so we can use it in the controllers
     req.auth = { userId }
     if (req.body.userId && req.body.userId !== userId) {

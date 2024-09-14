@@ -89,11 +89,23 @@ exports.deletePost = async (req, res) => {
     }
 
     // Delete the post if found
-    await Posts.destroy({
-      where: {
-        post_id: req.body.post_id,
-      },
-    });
+    // This deletes the image from the image folder before actually deleting the object from the database
+    if (post.image_url) {
+      const filename = post.image_url.split('/images/')[1];
+      fs.unlink(`images/${filename}`, async () => {
+        await Posts.destroy({
+          where: {
+            post_id: req.body.post_id,
+          },
+        });
+      });
+    } else {
+      await Posts.destroy({
+        where: {
+          post_id: req.body.post_id,
+        },
+      });
+    }
 
     // Fetch all remaining posts after deletion
     const result = await Posts.findAll();

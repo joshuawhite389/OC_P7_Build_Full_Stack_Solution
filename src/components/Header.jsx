@@ -2,10 +2,19 @@ import logo from '../assets/Groupomania_Logos/icon-left-font-cropped.png';
 import '../styles/Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import AccountModal from './AccountModal';
+import { useState } from 'react';
+
 const Header = ({ setIsOpen, isOpen }) => {
   const openModal = () => {
     setIsOpen(!isOpen);
   };
+
+  const [accountModalOpen, setAccountModalOpen] = useState(false);
+
+  const handleAccountModal = () => {
+    setAccountModalOpen(!accountModalOpen);
+  } 
 
   return (
     <div className="logoContainer">
@@ -15,9 +24,10 @@ const Header = ({ setIsOpen, isOpen }) => {
           <FontAwesomeIcon className="plusBtn" icon={faCirclePlus} />
           <p>Create New Post</p>
         </button>
-        <div className="profileIconContainer">
+        <div className="profileIconContainer" onClick={handleAccountModal}>
           <FontAwesomeIcon className="profileIcon" icon={faUser} />
         </div>
+          <AccountModal accountModalOpen={accountModalOpen} setAccountModalOpen={setAccountModalOpen} />
       </div>
     </div>
   );
