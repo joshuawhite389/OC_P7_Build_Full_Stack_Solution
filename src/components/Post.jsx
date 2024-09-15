@@ -36,13 +36,16 @@ const Post = ({
 
   const getReadPosts = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/api/auth/posts/${userId}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application  /json',
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `http://localhost:3001/api/auth/posts/${userId}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application  /json',
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
+      );
       const data = await response.json();
       setReadPosts(data.readPosts);
     } catch (error) {
@@ -52,7 +55,6 @@ const Post = ({
 
   useEffect(() => {
     getReadPosts();
-    console.log('readPosts', readPosts);
   }, [readPosts]);
 
   const handleDelete = async (post_id) => {
@@ -132,7 +134,10 @@ const Post = ({
           <div className="username">{username}</div>
           <div className="timestamp">{convertToEST(created_at)}</div>
           {/* if the post has not been read, add unread indicator. If post made by user, never show unread.  */}
-          {readPosts && readPosts.includes(post_id) ? null: (userId === userIdOfPost ? null : <div className='unread'>New</div>)}
+          {readPosts && readPosts.includes(post_id) ? null : userId ===
+            userIdOfPost ? null : (
+            <div className="unread">New</div>
+          )}
           {loginUsername === username && (
             <FontAwesomeIcon
               className="trashCan"

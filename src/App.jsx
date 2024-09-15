@@ -11,7 +11,7 @@ const App = () => {
   const { token, setToken } = useToken();
   const { userId, setUserId } = useToken();
   const [posts, setPosts] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   async function getPosts() {
     const response = await fetch('http://localhost:3001/api/posts', {
@@ -48,7 +48,6 @@ const App = () => {
                 setToken={setToken}
                 setView={setView}
                 setUserId={setUserId}
-
               />
             </>
           ) : (

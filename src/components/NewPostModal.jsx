@@ -65,7 +65,7 @@ const NewPostModal = ({
             className="modalForm"
             onSubmit={(e) => handleOnSubmit(e, titleRef, contentRef, imageRef)}
           >
-            <label htmlFor="title">Title:</label>
+            <label id='titleLabel' htmlFor="title">Title:</label>
             <input
               type="text"
               id="title"
@@ -73,9 +73,9 @@ const NewPostModal = ({
               ref={titleRef}
               required
             />
-            <label htmlFor="content">Content:</label>
+            <label id='contentLabel' htmlFor="content">Content:</label>
             <textarea id="content" name="content" ref={contentRef} required />
-            <label htmlFor="image">Image:</label>
+            <label id='imageLabel' htmlFor="image">Image:</label>
             <input
               type="file"
               id="image"
@@ -83,7 +83,7 @@ const NewPostModal = ({
               ref={imageRef}
               accept="image/*"
             />
-            <button type="submit">Create Post</button>
+            <button className='postButton' type="submit">Create Post</button>
           </form>
         </div>
       </div>

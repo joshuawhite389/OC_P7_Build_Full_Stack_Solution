@@ -41,6 +41,7 @@ const AccountModal = ({ accountModalOpen, setAccountModalOpen }) => {
         const data = await response.json();
         console.log('Success:', data.message);
         sessionStorage.clear();
+        navigate('/');
         window.location.reload();
         setAccountModalOpen(false);
       } else {
