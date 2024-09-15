@@ -5,7 +5,7 @@ import { faUser, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import AccountModal from './AccountModal';
 import { useState } from 'react';
 
-const Header = ({ setIsOpen, isOpen }) => {
+const Header = ({ setIsOpen, isOpen, token }) => {
   const openModal = () => {
     setIsOpen(!isOpen);
   };
@@ -20,10 +20,10 @@ const Header = ({ setIsOpen, isOpen }) => {
     <div className="logoContainer">
       <img src={logo} alt="Groupomania logo" className="logo" />
       <div className="accountPostContainer">
-        <button className="newPostContainer" onClick={openModal}>
+        {token && (<button className="newPostContainer" onClick={openModal}>
           <FontAwesomeIcon className="plusBtn" icon={faCirclePlus} />
           <p>Create New Post</p>
-        </button>
+        </button>)}
         <div className="profileIconContainer" onClick={handleAccountModal}>
           <FontAwesomeIcon className="profileIcon" icon={faUser} />
         </div>

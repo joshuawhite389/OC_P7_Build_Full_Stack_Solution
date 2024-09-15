@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/AccountModal.css';
 
 const AccountModal = ({ accountModalOpen, setAccountModalOpen }) => {
   const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const navigate = useNavigate();
 
   const toggleModal = () => {
     setAccountModalOpen(!accountModalOpen);
@@ -10,6 +13,7 @@ const AccountModal = ({ accountModalOpen, setAccountModalOpen }) => {
 
   const handleLogout = () => {
     sessionStorage.clear();
+    navigate('/');
     window.location.reload();
     setAccountModalOpen(false);
   };

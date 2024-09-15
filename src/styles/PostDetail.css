@@ -1,0 +1,26 @@
+.backArrow {
+  margin-top: 3rem;
+  margin-left: 4rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.postDetailContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 6rem;
+
+}
+
+.imgContainer {
+  height: auto;
+  width: 500px;
+}
+
+.postImg {
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}

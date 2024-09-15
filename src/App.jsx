@@ -6,25 +6,22 @@ import useToken from './useToken';
 import Home from './components/Home';
 import Header from './components/Header';
 
-
-
 const App = () => {
   const [view, setView] = useState('login');
   const { token, setToken } = useToken();
   const { userId, setUserId } = useToken();
   const [posts, setPosts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  
 
-    async function getPosts() {  
+  async function getPosts() {
     const response = await fetch('http://localhost:3001/api/posts', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
-  
+
     const data = await response.json();
     setPosts(data);
   }
@@ -34,21 +31,25 @@ const App = () => {
     }
   }, [token]);
 
-
-
   return (
     <>
-      <Header 
+      <Header
         posts={posts}
         setPosts={setPosts}
         setIsOpen={setIsOpen}
         isOpen={isOpen}
+        token={token}
       />
       <div className="inputContainer">
         {!token ? (
           view === 'login' ? (
             <>
-              <Login setToken={setToken} setView={setView} setUserId={setUserId}  />
+              <Login
+                setToken={setToken}
+                setView={setView}
+                setUserId={setUserId}
+
+              />
             </>
           ) : (
             <>
@@ -56,7 +57,7 @@ const App = () => {
             </>
           )
         ) : (
-          <Home 
+          <Home
             posts={posts}
             setPosts={setPosts}
             isOpen={isOpen}
