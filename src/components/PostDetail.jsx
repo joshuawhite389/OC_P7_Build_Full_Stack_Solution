@@ -1,16 +1,29 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useNavigate } from 'react-router-dom';
 import '../styles/PostDetail.css';
 import Header from './Header';
+import EditPostModal from './EditPostModal';
 
 const PostDetail = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   const navigate = useNavigate();
+
+  const getUserId = () => {
+    const userIdString = sessionStorage.getItem('userId');
+    const userIdFromSession = JSON.parse(userIdString);
+    setUserId(userIdFromSession);
+  };
+
+  useEffect(() => {
+    getUserId();
+  }, []);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -45,17 +58,40 @@ const PostDetail = () => {
     navigate('/');
   };
 
+  const handleEditModal = () => {
+    setEditModalOpen(!editModalOpen);
+  };
+
   return (
     <div>
       <Header />
-      <FontAwesomeIcon
-        className="backArrow"
-        onClick={handleGoBack}
-        icon={faArrowLeft}
-      />
+      {editModalOpen && (
+        <EditPostModal
+          editModalOpen={editModalOpen}
+          setEditModalOpen={setEditModalOpen}
+          postTitle={post.title}
+          postContent={post.content}
+          postId={post.post_id}
+          postImage={post.image_url}
+        />
+      )}
+      <div className="icons">
+        <FontAwesomeIcon
+          className="backArrow"
+          onClick={handleGoBack}
+          icon={faArrowLeft}
+        />
+        {userId === post.user_id && (
+          <FontAwesomeIcon
+            className="edit"
+            onClick={handleEditModal}
+            icon={faPenToSquare}
+          />
+        )}
+      </div>
       <div className="postDetailContainer">
         <h1>{post.title}</h1>
-        <p className='postContent'>{post.content}</p>
+        <p className="postContent">{post.content}</p>
         {post.image_url && (
           <div className="imgContainer">
             <img className="postImg" src={post.image_url} alt={post.title} />

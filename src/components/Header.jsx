@@ -1,4 +1,5 @@
 import logo from '../assets/Groupomania_Logos/icon-left-font-cropped.png';
+import icon from '../assets/Groupomania_Logos/icon.png';
 import '../styles/Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
@@ -21,11 +22,12 @@ const Header = ({ setIsOpen, isOpen, token,  }) => {
   return (
     <div className="logoContainer">
       <img src={logo} alt="Groupomania logo" className="logo" />
+      <img src={icon} alt="Groupomania logo" className="icon" />
       <div className="accountPostContainer">
         {token && (
           <button className="newPostContainer" onClick={openModal}>
             <FontAwesomeIcon className="plusBtn" icon={faCirclePlus} />
-            <p>Create New Post</p>
+            <p className='newPostText'>Create New Post</p>
           </button>
         )}
         <div className="profileIconContainer" onClick={handleAccountModal}>

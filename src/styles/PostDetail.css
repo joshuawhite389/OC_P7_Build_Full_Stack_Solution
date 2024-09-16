@@ -1,3 +1,15 @@
+.icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit {
+  margin-top: 3rem;
+  margin-right: 4rem;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
 .backArrow {
   margin-top: 3rem;
   margin-left: 4rem;

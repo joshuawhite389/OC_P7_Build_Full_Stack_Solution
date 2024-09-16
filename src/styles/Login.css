@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   margin-top: 4rem;
-  /* position: relative; */
-  /* bottom: 200px; */
 }
 
 #loginHeading {
@@ -80,4 +78,11 @@
 
 .viewLink:visited {
   color: black;
+}
+
+/* mobile stylings */
+@media (max-width: 768px) {
+  #username, #password {
+    width: 14rem;
+  }
 }

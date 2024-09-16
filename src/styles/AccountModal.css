@@ -30,3 +30,8 @@
 .button {
   cursor: pointer;
 }
+
+/* mobile stylings */
+@media (max-width: 768px) {
+  
+}

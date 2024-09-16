@@ -10,5 +10,6 @@ router.get("/", auth, userController.getPosts);
 router.get("/:id", auth, userController.getOnePost);
 router.post("/newPost", auth, multer, userController.addPost);
 router.delete("/deletePost", auth, userController.deletePost);
+router.post("/updatePost", auth, multer, userController.updatePost);
 
 module.exports = router;

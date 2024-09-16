@@ -42,8 +42,6 @@ exports.addPost = async (req, res) => {
 
   const username = user.username;
   const url = req.protocol + '://' + req.get('host');
-  console.log('req.protocol:', req.protocol);
-  console.log('req.get("host"):', req.get('host'));
 
   if (req.file) {
     console.log('req.file.filename: ', req.file.filename);
@@ -108,6 +106,67 @@ exports.deletePost = async (req, res) => {
     }
 
     // Fetch all remaining posts after deletion
+    const result = await Posts.findAll();
+
+    // Send response with the remaining posts
+    return res.status(200).json(result);
+  } catch (error) {
+    // Catch and handle any errors
+    console.error(error);
+    return res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// update post
+exports.updatePost = async (req, res) => {
+  console.log(req.body);
+  try {
+    const post = await Posts.findOne({
+      where: {
+        post_id: req.body.post_id,
+      },
+    });
+
+    // If post is not found, return 404 and stop further execution
+    if (!post) {
+      return res.status(404).json({
+        message: 'Post not found',
+      });
+    }
+
+    // Update the post if found
+    if (req.file) {
+      const url = req.protocol + '://' + req.get('host');
+      const imageUrl = url + '/images/' + req.file.filename;
+      const updatedPost = await Posts.update(
+        {
+          title: req.body.title,
+          content: req.body.content,
+          image_url: imageUrl,
+        },
+        {
+          where: {
+            post_id: req.body.post_id,
+          },
+        }
+      );
+    } else {
+      // if there is no picture
+      const updatedPost = await Posts.update(
+        {
+          title: req.body.title,
+          content: req.body.content,
+          image_url: null,
+        },
+        {
+          where: {
+            post_id: req.body.post_id,
+          },
+        }
+      );
+    }
+
+    // Fetch all remaining posts after update
     const result = await Posts.findAll();
 
     // Send response with the remaining posts

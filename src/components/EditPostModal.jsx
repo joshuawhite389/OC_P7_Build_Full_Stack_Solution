@@ -1,18 +1,53 @@
 import '../styles/NewPostModal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
-const NewPostModal = ({ setIsOpen, userId, token, getPosts }) => {
+const EditPostModal = ({ setEditModalOpen, postId }) => {
   const titleRef = useRef();
   const contentRef = useRef();
   const imageRef = useRef();
 
+  const [userId, setUserId] = useState();
+  const [token, setToken] = useState();
+
   const closeModal = () => {
-    setIsOpen(false);
+    setEditModalOpen(false);
   };
 
-  const handleOnSubmit = (e, titleRef, contentRef, imageRef) => {
+  const getUserIdAndToken = () => {
+    const userIdString = sessionStorage.getItem('userId');
+    const userIdFromSession = JSON.parse(userIdString);
+    setUserId(userIdFromSession);
+    const tokenString = sessionStorage.getItem('token');
+    const tokenFromSession = JSON.parse(tokenString);
+    setToken(tokenFromSession);
+  };
+
+  useEffect(() => {
+    getUserIdAndToken();
+  }, []);
+
+  const updatePost = async (formData) => {
+    await fetch('http://localhost:3001/api/posts/updatePost', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        closeModal();
+        // Refresh the page to display the updated post
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
+  const handleOnSubmit = async (e, titleRef, contentRef, imageRef) => {
     e.preventDefault();
 
     const title = titleRef.current.value;
@@ -23,25 +58,11 @@ const NewPostModal = ({ setIsOpen, userId, token, getPosts }) => {
     formData.append('title', title);
     formData.append('content', content);
     formData.append('user_id', userId);
+    formData.append('post_id', postId);
     if (imageFile) {
       formData.append('image', imageFile);
     }
-
-    fetch('http://localhost:3001/api/posts/newPost', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        getPosts();
-        closeModal();
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    updatePost(formData);
   };
 
   return (
@@ -53,7 +74,7 @@ const NewPostModal = ({ setIsOpen, userId, token, getPosts }) => {
             onClick={closeModal}
             icon={faCircleXmark}
           />
-          <h2>Create New Post</h2>
+          <h2>Edit Post</h2>
           <form
             className="modalForm"
             onSubmit={(e) => handleOnSubmit(e, titleRef, contentRef, imageRef)}
@@ -83,7 +104,7 @@ const NewPostModal = ({ setIsOpen, userId, token, getPosts }) => {
               accept="image/*"
             />
             <button className="postButton" type="submit">
-              Create Post
+              Submit Edit
             </button>
           </form>
         </div>
@@ -92,4 +113,4 @@ const NewPostModal = ({ setIsOpen, userId, token, getPosts }) => {
   );
 };
 
-export default NewPostModal;
+export default EditPostModal;

@@ -64,3 +64,43 @@
   height: 30px;
   width: 30px;
 }
+
+/* mobile stylings */
+@media (max-width: 768px) {
+  .logo {
+    display: none;
+  }
+  
+  .icon {
+    width: 6rem;
+    height: 100%;
+  }
+
+  .plusBtn {
+    margin-left: 2rem;
+  }
+
+  .newPostContainer {
+    margin-right: 0rem;
+  }
+
+  .newPostContainer:hover {
+    background-color: white;
+  }
+
+  .newPostText {
+    display: none;
+  }
+
+
+  .profileIconContainer {
+    margin: 0;
+  }
+
+  .profileIcon {
+    height: 20px;
+    width: 20px;
+    
+  }
+
+}

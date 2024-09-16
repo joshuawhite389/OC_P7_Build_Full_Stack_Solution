@@ -74,3 +74,18 @@
   border-radius: 10px;
   background:#ec300a57;
 }
+
+/* mobile stylings */
+@media (max-width: 768px) {
+  .username {
+    padding-left: 2rem;
+  }
+
+  .postTitle::after {
+    content: "";
+    display: block;
+    margin-top: 2rem;
+    border-bottom: 1px solid #cbcbcb;
+    width: 100%;
+  }
+}

@@ -1,9 +1,10 @@
 import Post from './Post';
 import NewPostModal from './NewPostModal';
+import '../styles/Home.css';
 
 const Home = ({ setPosts, posts, isOpen, setIsOpen, userId, token, getPosts }) => {
   return (
-    <div>
+    <div className='appContainer'>
       {isOpen && (
         <NewPostModal
           setIsOpen={setIsOpen}
