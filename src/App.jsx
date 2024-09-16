@@ -11,7 +11,7 @@ const App = () => {
   const { token, setToken } = useToken();
   const { userId, setUserId } = useToken();
   const [posts, setPosts] = useState([]);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   async function getPosts() {
     const response = await fetch('http://localhost:3001/api/posts', {

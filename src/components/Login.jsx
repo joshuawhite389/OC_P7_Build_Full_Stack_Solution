@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 
 const Login = ({ setToken, setView, setUserId }) => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
   async function loginUser(credentials) {
@@ -26,7 +26,6 @@ const Login = ({ setToken, setView, setUserId }) => {
         throw new Error(data.error || 'Failed to login');
       }
       setToken(data.token);
-      console.log(data);
       sessionStorage.setItem('username', JSON.stringify(data.username));
       setUserId(data.userId);
       setError(null);

@@ -55,7 +55,7 @@ const PostDetail = () => {
       />
       <div className="postDetailContainer">
         <h1>{post.title}</h1>
-        <p>{post.content}</p>
+        <p className='postContent'>{post.content}</p>
         {post.image_url && (
           <div className="imgContainer">
             <img className="postImg" src={post.image_url} alt={post.title} />
