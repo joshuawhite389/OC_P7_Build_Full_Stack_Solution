@@ -6,7 +6,7 @@ import { faUser, faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import AccountModal from './AccountModal';
 import { useState } from 'react';
 
-const Header = ({ setIsOpen, isOpen, token,  }) => {
+const Header = ({ setIsOpen, isOpen, token }) => {
   const openModal = () => {
     setIsOpen(!isOpen);
   };

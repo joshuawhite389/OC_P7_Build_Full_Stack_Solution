@@ -41,3 +41,31 @@
   height: auto;
   border-radius: 15px;
 }
+
+/* mobile stylings */
+@media (max-width: 768px) {
+
+  .postDetailContainer {
+    text-align: center;
+  }
+  
+  .postContent {
+    width: 100%;
+    word-wrap: break-word;
+  }
+
+  .imgContainer {
+    height: auto;
+    width: 300px;
+  }
+
+  .backArrow {
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
+
+  .edit {
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
+}

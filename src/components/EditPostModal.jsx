@@ -87,6 +87,7 @@ const EditPostModal = ({ setEditModalOpen, postId }) => {
               id="title"
               name="title"
               ref={titleRef}
+              maxLength={25}
               required
             />
             <label id="contentLabel" htmlFor="content">
